@@ -5,6 +5,11 @@ class Todo < ActiveRecord::Base
     due_date == Date.today
   end
 
+  def to_pleasant_string
+    is_completed = completed ? "[X]" : "[ ]"
+    "#{id}. #{due_date.to_s(:long)}- #{todo_text} #{is_completed}"
+  end
+
   def to_displayable_string
     display_status = completed ? "[X]" : "[ ]"
     display_date = due_today? ? nil : due_date
